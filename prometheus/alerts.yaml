@@ -1,0 +1,12 @@
+groups:
+  - name: service-health
+    rules:
+      - alert: ServiceDown
+        expr: probe_success == 0
+        for: 30s
+        labels:
+          severity: critical
+        annotations:
+          summary: "Service down (probe failed)"
+          description: "The blackbox probe for {{ $labels.instance }} failed."
+
