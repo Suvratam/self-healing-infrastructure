@@ -1,0 +1,14 @@
+---
+- hosts: localhost
+  connection: local
+  vars:
+    ansible_python_interpreter: /usr/local/bin/python3.11
+
+  tasks:
+    - name: Restart NGINX container
+      docker_container:
+        name: self-healing-infrastructure-nginx-1
+        state: started
+        restart: yes
+        docker_host: "unix:///var/run/docker.sock"
+      when: alertname == "NginxHttpDown"

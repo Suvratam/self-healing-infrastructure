@@ -1,0 +1,17 @@
+# Use official Nginx image
+FROM nginx:latest
+
+# Set working directory (for clarity only)
+WORKDIR /usr/share/nginx/html
+
+# Remove the default Nginx index file
+RUN rm -rf ./*
+
+# Copy your entire website (HTML, CSS, JS, images, videos)
+COPY . .
+
+# Expose port 80
+EXPOSE 80
+
+# Nginx entrypoint handles the rest
+
